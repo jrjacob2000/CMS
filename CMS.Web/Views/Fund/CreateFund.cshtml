@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Update";
+}
+<style>
+    .row {
+        margin-left:15px; margin-right:15px
+    }
+</style>
+<div class=" tab-pane active">
+    <form id="formUpdate" role="form" class="form-horizontal" style="height:100%" ng-submit="createFund($event)">
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">{{selectedAction.LabelName}}:</label>
+                        <div class="col-sm-7">
+                            <input id="particular" name="particular" type="text" class="form-control input-xs" ng-model="FundForm.Name" required data-required-msg="Required" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-success btn-lg" style="width: 100px;">
+                <span data-ng-hide="showUpdatingAnimation">
+                    Save
+                </span>
+                <span data-ng-show="showUpdatingAnimation">
+                    Saving
+                    <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>
+                </span>
+            </button>
+        </div>
+    </form>
+    
+</div>

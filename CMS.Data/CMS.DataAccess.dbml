@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CMS" Class="CMS_DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=CMS;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CMSConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Ent_Member" Member="Members">
+    <Type Name="Member">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Gender" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Birthday" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="MobilePhone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LandLine" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="MaritalStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NameOfSpouse" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SpouseContact" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ChildrenCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MemberStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="BaptizedDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="BaptizedPlace" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="BaptizedMinister" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="BelongsToGroups" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Positions" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Ent_Transaction" Member="Transactions">
+    <Type Name="Transaction">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Reference" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="CreditAccountId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="DebitAccountId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Account_Transaction" Member="CreditAccount" Storage="_Account" ThisKey="CreditAccountId" OtherKey="Id" Type="Account" IsForeignKey="true" />
+      <Association Name="Account_Transaction1" Member="DebitAccount" Storage="_Account1" ThisKey="DebitAccountId" OtherKey="Id" Type="Account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Ref_Account" Member="Accounts">
+    <Type Name="Account">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Category" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Type" Storage="_Types" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="Account_Transaction" Member="Transactions" ThisKey="Id" OtherKey="CreditAccountId" Type="Transaction" />
+      <Association Name="Account_Transaction1" Member="Transactions1" ThisKey="Id" OtherKey="DebitAccountId" Type="Transaction" />
+      <Association Name="Account_Fund" Member="Funds" ThisKey="Id" OtherKey="Parent" Type="Fund" />
+      <Association Name="Fund_Account" Member="Fund" ThisKey="Id" OtherKey="AccountId" Type="Fund" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Ref_Fund" Member="Funds">
+    <Type Name="Fund">
+      <Column Name="ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Parent" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="AccountId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="false" />
+      <Column Name="FundType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Fund_Account" Member="Accounts" ThisKey="AccountId" OtherKey="Id" Type="Account" Cardinality="One" />
+      <Association Name="Account_Fund" Member="Account" ThisKey="Parent" OtherKey="Id" Type="Account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.V_FundActivity" Member="FundActivities">
+    <Type Name="FundActivity">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Parent" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="FundType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="AccountId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.V_BankBalance" Member="BankBalances">
+    <Type Name="BankBalance">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

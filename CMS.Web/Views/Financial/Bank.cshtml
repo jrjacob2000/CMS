@@ -1,0 +1,132 @@
+﻿@{
+    Layout = null;
+    //ViewBag.Title = "Bank";
+}
+<style>
+    .dataTables_info {
+        clear: both;
+        float: left;
+        padding-top: 0.755em;
+    }
+
+    .dataTables_paginate {
+        float: right;
+        text-align: right;
+        padding-top: 0.25em;
+    }
+
+    .dataTables_filter {
+        float: left;
+        text-align: right;
+        vertical-align:middle;
+        padding-bottom: 0.25em;
+    }
+
+    .dataTables_filter-right {
+        float: right;
+        text-align: right;
+        padding-bottom: 0.25em;
+    }
+</style>
+
+<div ng-controller="bankingController">
+    <div style="margin-bottom:10px; border-bottom-width: 1px; height:30px;  border-bottom-style:solid;  border-color: rgb(221, 221, 221);">
+
+    </div>
+    <div class="container" style="padding-bottom:10px">
+        <div style="padding-top:20px" class="tab-content">
+            <div ng-show="isSet(1)">
+                <div class="dropdown" style="padding:0.25em; border-bottom:1px solid lightgrey;  margin-bottom:5px; width:75%;background-color:lightgray">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                        <span class="glyphicon glyphicon-cog"></span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href ng-click="UpsertBankModal($event);">Create new</a></li>                        
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href ng-click="BankTransferModal($event);">Transfer</a></li>   
+                    </ul>
+                    <div style="float:right;padding-top:7px;padding-right:10px">
+                        <label>As to date</label>
+                    </div>
+                </div>
+                <table style="margin-bottom:0px; width:75%" class="table table-bordered table-striped table-hover">
+                    <thead>                        
+                        <tr>
+                            <th>Bankname</th> 
+                            <th>Ending Balance</th>
+                            <th width="150px">Actions</th>
+                        </tr>
+                    </thead>                    
+                    <tbody>
+                        <tr ng-repeat="x in BankInfos" style="cursor: pointer">
+                            <td>{{ x.Name}}</td>
+                            <td>{{ x.Amount | currency:"Php "}}</td>
+                            <td>
+                                <button ng-click="UpsertBankModal($event, x);" title="Edit" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
+                                <button ng-really-message="Are you sure to delete this record?" title="Delete" ng-really-click="Delete($event, x.Id);" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+                                <button ng-click="showActivity(2,x)" Title="Show Activity" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-list-alt"></span></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-show="isSet(2)">
+                <button ng-click="setTab(1)" class="btn btn-primary btn-xs">Back</button>
+                <div class="dataTables_filter-right">
+                    <span>
+                        Showing activities from:
+                    </span>
+                    <input id="Search" name="Search" ng-change="searchBankActivity()" placeholder="Search by Date" kendo-date-picker k-format="MM/dd/yyyy" ng-model="SearchDate" k-ng-model="SearchDateobj" />
+                    <span>
+                        to date
+                    </span>
+                </div>
+
+                <table style="margin-bottom:0px" class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Bankname</th>
+                            <th>Transaction</th>
+                            <th>Account</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th colspan="4" style="text-align:right">Ending Balance:</th>
+                            <th>{{totalBalance | currency:"Php "}}</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr dir-paginate="x in BankActivities | filter:search | itemsPerPage: 10" total-items=totalRecords current-page="currentPage" pagination-id="bankingPaging" style="cursor: pointer">
+                            <td>{{ x.BankName}}</td>
+                            <td>{{ x.TransactionType}}</td>
+                            <td>{{ x.AccountName}}</td>
+                            <td>{{ x.Date | date:'MM/dd/yyyy'}}</td>
+                            <td>{{ x.Amount | currency:"Php "}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing {{5 * (currentPage-1) +1}} to {{(5 * (currentPage-1))+ BankActivities.length}} of {{totalRecords}} entries</div>
+                <dir-pagination-controls class="dataTables_paginate" boundary-links="true" on-page-change="pageChanged(newPageNumber)" template-url="~/Shared/Pagination" pagination-id="bankingPaging"></dir-pagination-controls>
+            </div>
+        </div>
+    </div>
+    <div kendo-window="upsertBankPopup" k-title="'New Bank'"
+         k-width="400" k-height="225" k-visible="false"
+         k-content="{ url: '../Financial/UpsertBank' }"
+         k-on-open="win2visible"
+         k-on-close="ShowMessage(e,'warning');"
+         k-modal="true">
+    </div>
+    <div kendo-window="bankTransferPopup" k-title="'Bank Transfer'"
+         k-width="600" k-height="350" k-visible="false"
+         k-content="{ url: '../Financial/BankTransfer' }"
+         k-on-open="win2visible"
+         k-on-close="ShowMessage(e,'warning');"
+         k-modal="true">
+    </div>
+</div>
+
+

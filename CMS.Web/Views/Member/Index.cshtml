@@ -1,0 +1,239 @@
+﻿@{
+    Layout = null;
+}
+    <div ng-controller="createMemberController">
+        <div style="display:block;">
+            <form id="createMemberFormId" name="createMemberForm" kendo-validator="validator" ng-submit="save($event)" class="form-horizontal" role="form" novalidate>
+                <div style="display:block; height:400px; overflow:auto">
+                    <div class="col-sm-5">
+                        <fieldset>
+                            <h4>Personal Detail</h4>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group form-group-sm">
+                                        <label class="control-label col-sm-3">First Name:</label>
+                                        <div class="col-md-7">
+                                            <input name="FirstName" type="text" class="form-control input-xs" ng-model="MemberForm.FirstName" required data-required-msg="Required" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">Middle Name:</label>
+                                        <div class="col-md-7">
+                                            <input name="MiddleName" type="text" class="form-control input-xs" ng-model="MemberForm.MiddleName" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">Last Name:</label>
+                                        <div class="col-md-7">
+                                            <input name="LastName" type="text" class="form-control input-xs" ng-model="MemberForm.LastName" required data-required-msg="Required" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">Age:</label>
+                                        <div class="col-md-7">
+                                            <input name="age" kendo-numeric-text-box k-min="0" k-max="100" k-ng-model="MemberForm.Age" required data-required-msg="Required" />
+                                            <span style="margin-left:8px" class="k-invalid-msg" data-for="age"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">Gender:</label>
+                                        <div class="col-md-7">
+                                            <select name="Gender" ng-model="MemberForm.Gender" class="form-control input-xs">
+                                                <option value="M" title="Male">Male</option>
+                                                <option value="F" title="Female">Female</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">Birthday:</label>
+                                        <div class="col-md-7">
+                                            <input name="Birthday" kendo-date-picker ng-model="MemberForm.Birthday" k-ng-model="MemberForm.BirthdayObj" k-format="MM/dd/yyyy" required data-required-msg="Required" />
+                                            <span style="margin-left:8px" class="k-invalid-msg" data-for="Birthday"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">Mobile Phone:</label>
+                                        <div class="col-md-7">
+                                            <input name="MobilePhone" type="text" class="form-control input-xs" ng-model="MemberForm.MobilePhone" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">Land Line:</label>
+                                        <div class="col-md-7">
+                                            <input name="LandLine" type="text" class="form-control input-xs" ng-model="MemberForm.LandLine" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">Address:</label>
+                                        <div class="col-md-7">
+                                            <textarea name="Address" rows="3" class="form-control input-xs" ng-model="MemberForm.Address" required data-required-msg="Required"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <h4>Family Data</h4>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">Marital Status:</label>
+                                        <div class="col-md-7">
+                                            <select name="MaritalStatus" class="form-control input-xs" ng-model="MemberForm.MaritalStatus" required data-required-msg="Required">
+                                                <option value="Single">Single</option>
+                                                <option value="Married">Married</option>
+                                                <option value="Separate">Separate</option>
+                                                <option value="Widow">Widow</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">Name of Spouse:</label>
+                                        <div class="col-md-7">
+                                            <input name="SpouseName" type="text" class="form-control input-xs" ng-model="MemberForm.NameOfSpouse" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">Spouse Contact:</label>
+                                        <div class="col-md-7">
+                                            <input name="SpouseContact" type="text" class="form-control input-xs" ng-model="MemberForm.SpouseContact" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">No of Children:</label>
+                                        <div class="col-md-7">
+                                            <input kendo-numeric-text-box k-min="0" k-max="100" k-ng-model="MemberForm.ChildrenCount" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-sm-5">
+                        <fieldset>
+                            <h4>Data</h4>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">Member Status:</label>
+                                        <div class="col-md-7">
+                                            <input name="MemberStatus" type="text" class="form-control input-xs" ng-model="MemberForm.MemberStatus" required data-required-msg="Required" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">Date Baptized:</label>
+                                        <div class="col-md-7">
+                                            <input name="DateBaptized" kendo-date-picker ng-model="MemberForm.BaptizedDate" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">Place:</label>
+                                        <div class="col-md-7">
+                                            <input name="PlaceBaptized" type="text" class="form-control input-xs" ng-model="MemberForm.BaptizedPlace" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">Rev. Minister:</label>
+                                        <div class="col-md-7">
+                                            <input name="MinisterBaptized" type="text" class="form-control input-xs" ng-model="MemberForm.BaptizedMinister" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">Belongs to the Group(s):</label>
+                                        <div class="col-md-7">
+                                            <input name="Groups" type="text" class="form-control input-xs" ng-model="MemberForm.BelongsToGroups" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">Holds the Position(s):</label>
+                                        <div class="col-md-7">
+                                            <input name="Positions" type="text" class="form-control input-xs" ng-model="MemberForm.Positions" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div style="display: inline-block; text-align: right; width: 850px;">
+                    <hr />
+                    <button class="btn btn-success btn-lg" style="width: 100px;">
+                        <span data-ng-hide="saving">
+                            Save
+                        </span>
+                        <span data-ng-show="saving">
+                            Saving
+                            <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+

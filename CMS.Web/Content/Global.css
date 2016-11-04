@@ -1,0 +1,99 @@
+﻿body {
+    margin: 2px 0 0 2px;
+    padding: 0;
+    color: #535353;
+    background-color: #FFF;
+    font-family: Arial,Verdana,sans-serif;
+    height: 100%;
+    font-size: 12px !important;
+}
+ html,body,body > div
+        {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        span.k-tooltip
+        {
+            margin-left: 6px;
+            position:absolute !important;
+        }
+
+.form-readonly-value
+{
+    padding-top:2px;
+    padding-bottom:2px;
+    padding-left:7px;
+    padding-right:7px;    
+    /*font-size :14px;*/
+    font-weight:600;
+    color :#535353
+}
+ 
+
+
+.table
+{
+    font-size : 13px !important;
+}
+.table-hover tbody tr:hover td
+{
+    background-color: #e0e0e0 !important;
+}
+.table  tbody  tr  td
+{
+    padding:5px !important;
+}
+
+#SearchMember
+{
+    border-right:none; 
+    border-bottom:2px solid #ccc; 
+    position:relative; 
+    padding: 9px 0 9px 9px; 
+    background-color :#EEE
+}
+
+#MemberListHeader
+{
+    padding: 6px 5px 6px 5px;
+    background-color :#EEE ;
+}
+
+#MemberList
+{
+    overflow: auto;
+    position: relative;
+    
+}
+
+
+/***********************/
+/*Loading Animation*/
+/***********************/
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+/***********************/
+
+/*input.k-numeric-wrap.k-input.k-invalid, input.ng-invalid, select.ng-invalid, textarea.ng-invalid {
+  border: 1px solid red;
+}
+input.ng-valid {
+  border: 1px solid green;
+}*/
+
+

@@ -1,0 +1,93 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Update";
+}
+<style>
+    .row {
+        margin-left:15px; margin-right:15px
+    }
+</style>
+<div class=" tab-pane active">
+    <form id="formUpdate" role="form" class="form-horizontal" style="height:100%" ng-submit="update($event)" novalidate >
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">{{Referencelabel}}:</label>
+                        <div class="col-md-7">
+                            <input id="particular" name="particular" type="text" class="form-control input-xs" ng-model="updateContribForm.Reference" required data-required-msg="Required" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="account">Campaign/Fund:</label>
+                        <div class="col-md-7">
+                            <select id="account" class="form-control input-xs"  ng-model="updateContribForm.CreditAccount" ng-options="fund.Description for fund in Funds"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="amount">Amount:</label>
+                        <div class="col-md-7">
+                            <input name="amount" id="amount" kendo-numeric-text-box k-min="0" data-format="n4"
+                                   data-decimals="4"
+                                   data-step="0.01"
+                                   data-role="numerictextbox"
+                                   ng-model="updateContribForm.Amount"
+                                   k-ng-model="updateContribForm.Amount">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="period">Period:</label>
+                        <div class='col-md-7'>
+                            <input id="Birthday" name="Birthday" kendo-date-picker k-format="MM/dd/yyyy" ng-model="updateContribForm.Date" k-ng-model="updateContribForm.Dateobj" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="particular">Notes:</label>
+                        <div class="col-md-7">
+                            <textarea name="Notes" type="text" class="form-control input-xs" id="notes" ng-model="updateContribForm.Notes"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="account">Deposit to:</label>
+                        <div class="col-md-7">                            
+                            <select id="account" class="form-control input-xs" ng-model="updateContribForm.DebitAccount" ng-options="bank.Description for bank in Banks"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-success btn-lg" style="width: 100px;">
+                <span data-ng-hide="showUpdatingAnimation">
+                    Save
+                </span>
+                <span data-ng-show="showUpdatingAnimation">
+                    Saving
+                    <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>
+                </span>
+            </button>
+        </div>
+    </form>
+    
+</div>

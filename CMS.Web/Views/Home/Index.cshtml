@@ -1,0 +1,212 @@
+﻿@{
+    //Layout = null;
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    html, body {
+        font-size: 12px !important;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    td {
+        width:300px;
+    }
+
+    #SearchMember {
+        border-right: none;
+        border-bottom: 2px solid #ccc;
+        position: relative;
+        padding: 9px 0 9px 9px;
+        background-color: #EEE;
+    }
+
+    #MemberListHeader {
+        padding: 6px 5px 6px 5px;
+        background-color: #EEE;
+    }
+
+    #MemberList {
+        overflow: auto;
+        position: relative;
+    }
+
+    .formReadOnly tbody th {
+        padding: 5px 4px 5px 0;
+        width: 15%;
+        /*font-weight: bold;*/
+        color: #888;
+        vertical-align: top;
+        /*border-bottom: solid 1px #eeeff1;*/
+        text-align: left;
+    }
+
+    hr{
+        margin-top:-.5px !important
+    }
+   
+</style>
+
+<div ng-cloak class="splitterContainer" ng-controller="membershipController" style="height: 100%;">
+    <div kendo-splitter
+         k-panes="[  { collapsible: false, size: '250' }, { collapsible: false}]"
+         k-orientation="horizontal" style="border: 0;height:100%">
+        <div >
+            <div z">
+                <input class="form-control input-xs" type="text" ng-model="search" placeholder="Search" style="width: 200px">
+            </div>
+            <div id="MemberListHeader">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Members </th>
+                            <td style="text-align: right; width: 100%">
+                                <a ng-click="ReLoadMembers()">
+                                    <span data-ng-hide="loading">
+                                        <i class="glyphicon glyphicon-refresh"></i>
+                                    </span>
+                                    <span data-ng-show="loading">
+                                        <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>
+                                    </span>
+                                </a>
+
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div id="MemberList" style="height: calc(100% - 79px); overflow: auto">
+                <table class="table table-striped table-hover">
+                    <tbody>
+                        <tr ng-repeat="x in Members | filter:search" ng-click="select($event, x.Id)" data-ng-class="{success: isSelected(x.Id)}" style="cursor: pointer">
+                            <td>{{ x.FirstName + ', ' + x.LastName }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div>
+            <div id="msgContainer" style="width: 100%"></div>
+            <span id="msgNotification" style="position: absolute; z-index: 1"></span>
+            <div style="height: 100%; position: relative;">
+                <div style="padding: 3px; border: solid 1px #ccc; border-right: none; border-left: none">
+                    <div kendo-toolbar k-options="toolbarOptions"></div>
+                </div>
+                <form name="memberForm" class="formReadOnly" role="form" novalidate>
+                    <div id="formContainer" class="container" style="width: 700px; display: inline-block; overflow: auto">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th colspan="2" style="color: #535353;">
+                                        <h4>Personal Detail</h4>
+                                    </th>
+                                    <th colspan="2" style="color: #535353;"><h4>Data</h4></th>
+                                </tr>
+                                <tr>
+                                    <th>First Name:</th>
+                                    <td>{{Member.FirstName}}</td>
+                                    <th>Member Status:</th>
+                                    <td>{{Member.MemberStatus}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Middle Name:</th>
+                                    <td>{{Member.MiddleName}}</td>
+                                    <th>Date Baptized:</th>
+                                    <td>{{Member.BaptizedDate}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Last Name:</th>
+                                    <td>{{Member.LastName}}</td>
+                                    <th>Place:</th>
+                                    <td>{{Member.BaptizedPlace}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Age:</th>
+                                    <td>{{Member.Age}}</td>
+                                    <th>Minister:</th>
+                                    <td>{{Member.BaptizedMinister}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Gender:</th>
+                                    <td>{{Member.Gender}}</td>
+                                    <th>Belongs to Groups</th>
+                                    <td>{{Member.BelongsToGroups}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Birthday:</th>
+                                    <td>{{Member.Birthday}}</td>
+                                    <th>Positions:</th>
+                                    <td>{{Member.Positions}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Mobile Phone:</th>
+                                    <td>{{Member.MobilePhone}}</td>
+                                    <th></th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Land Line:</th>
+                                    <td>{{Member.LandLine}}</td>
+                                    <th></th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Address:</th>
+                                    <td>{{Member.Address}}</td>
+                                    <th></th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" style="color: #535353;">
+                                        <h4>Family Data</h4>
+                                    </th>
+                                    <th colspan="2"></th>
+                                </tr>
+                                <tr>
+                                    <th>Marital Status:</th>
+                                    <td>{{Member.MaritalStatus}}</td>
+                                    <th></th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Name of Spouse</th>
+                                    <td>{{Member.NameOfSpouse}}</td>
+                                    <th></th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Spouse Contact:</th>
+                                    <td>{{Member.SpouseContact}}</td>
+                                    <th></th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>No of Children:</th>
+                                    <td>{{Member.ChildrenCount}}</td>
+                                    <th></th>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div kendo-window="win2" k-title="'New Member'"
+         k-width="900" k-height="500" k-visible="false"
+         k-content="{ url: '../member' }"
+         k-on-open="win2visible"
+         k-on-close="ShowMessage(e,'warning');"
+         k-modal="true">
+    </div>
+</div>
+    @section MyScripts {
+        <script src="~/Scripts/CMS/Member.js"></script>
+    }
+
+
+
+

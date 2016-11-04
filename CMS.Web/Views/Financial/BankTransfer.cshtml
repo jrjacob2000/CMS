@@ -1,0 +1,73 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Update";
+}
+<style>
+    .row {
+        margin-left:15px; margin-right:15px
+    }
+</style>
+<div class=" tab-pane active">
+    <form id="formUpdate" role="form" class="form-horizontal" style="height:100%" ng-submit="Transfer($event)" novalidate >
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="amount">Amount:</label>
+                        <div class="col-md-7">
+                            <input name="amount" id="amount" kendo-numeric-text-box k-min="0" data-format="n4"
+                                   data-decimals="4"
+                                   data-step="0.01"
+                                   data-role="numerictextbox"
+                                   ng-model="TransferForm.Amount"
+                                   k-ng-model="TransferForm.Amount">
+                        </div>
+                    </div>
+                </div>
+            </div>           
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="account">From Account:</label>
+                        <div class="col-md-7">
+                            <select id="account" class="form-control input-xs" ng-model="TransferForm.CreditAccount" ng-options="bank.Name for bank in Banks"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="account">To Account:</label>
+                        <div class="col-md-7">                            
+                            <select id="account" class="form-control input-xs" ng-model="TransferForm.DebitAccount" ng-options="bank.Name for bank in Banks"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="period">Transaction Date:</label>
+                        <div class='col-md-7'>
+                            <input id="txtDate" name="Date" kendo-date-picker k-format="MM/dd/yyyy" ng-model="TransferForm.TransactionDate" k-ng-model="Dateobj" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-success btn-lg" style="width: 100px;">
+                <span data-ng-hide="showUpdatingAnimation">
+                    Save
+                </span>
+                <span data-ng-show="showUpdatingAnimation">
+                    Saving
+                    <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>
+                </span>
+            </button>
+        </div>
+    </form>
+    
+</div>

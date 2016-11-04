@@ -1,0 +1,66 @@
+﻿@{
+    //Layout = null;
+}
+<style>
+    .hiddenRow {
+        padding: 0 !important;
+    }
+</style>
+<div>
+    <div ng-controller="financialController" data-ng-init="init()">
+        <div style="height:100%; margin:5px">
+            <!-- Navigation Buttons -->
+            <div class="col-md-2" style="padding-right:0">
+                <ul style="margin-top:20px" class="nav nav-pills nav-stacked" id="myTabs">
+                    Transaction
+                    <li class="active"><a href="#Contribution">Contribution</a></li>
+                    <li><a href="#expense">Expense</a></li>
+                  @*  <li><a href="#Deposit">Deposit</a></li>
+                    <li><a href="#Reimburse">Cash Reimbursement</a></li>*@
+                    Banking
+                    <li><a href="#Bank">Banking</a></li>
+                    <li><a href="#funds">Funds</a></li>
+                </ul>
+            </div>
+            <!-- Content -->
+            <div class="col-md-10 " style="height:100%;padding-left:1px; padding-right:0">
+                <div id="msgContainer" style="width: 100%; display:block"></div>
+                <span id="msgNotification" style="position: absolute; z-index: 1"></span>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="Contribution">
+                        <div ng-include="'../Financial/CreateContribution'"></div>
+                    </div>
+                    <div class="tab-pane" id="expense">
+                        <div ng-include="'../Financial/CreateExpense'"></div>
+                    </div>
+                    <div class="tab-pane" id="Deposit">
+                        @*<div ng-include="'../Financial/Deposit'"></div>*@
+                    </div>
+                    <div class="tab-pane" id="Reimburse">
+                        @*<div ng-include="'../Financial/Reimbursement'"></div>*@
+                    </div>
+                    <div class="tab-pane" id="Bank">
+                        <div ng-include="'../Financial/Bank'"></div>
+                    </div>
+                    <div class="tab-pane" id="funds">
+                        <div ng-include="'../Fund/index'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @section MyScripts {
+            <script src="~/Scripts/CMS/finance.js"></script>
+        <script src="~/Scripts/CMS/fund.js"></script>
+        }
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
